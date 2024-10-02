@@ -30,7 +30,7 @@ def signup(
     return "Success"
 
 
-@user_router.patch("/me", status_code=200)
+@user_router.get("/me", status_code=200)
 def me(user: Annotated[User, Depends(login_with_header)]) -> MyProfileResponse:
     return MyProfileResponse.from_user(user)
 
