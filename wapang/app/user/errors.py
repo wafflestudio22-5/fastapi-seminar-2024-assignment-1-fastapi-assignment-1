@@ -1,18 +1,19 @@
 from fastapi import HTTPException
+from starlette.status import *
 
 
 class EmailAlreadyExistsError(HTTPException):
     def __init__(self) -> None:
-        super().__init__(409, "Email already exists")
+        super().__init__(HTTP_409_CONFLICT, "Email already exists")
 
 class UsernameAlreadyExistsError(HTTPException):
     def __init__(self) -> None:
-        super().__init__(409, "Username already exists")
+        super().__init__(HTTP_409_CONFLICT, "Username already exists")
 
 class InvalidFieldFormatError(HTTPException):
     def __init__(self) -> None:
-        super().__init__(400, "Invalid field format")
+        super().__init__(HTTP_400_BAD_REQUEST, "Invalid field format")
 
 class MissingRequiredFieldError(HTTPException):
     def __init__(self) -> None:
-        super().__init__(400, "Missing required field")
+        super().__init__(HTTP_400_BAD_REQUEST, "Missing required field")
