@@ -1,7 +1,7 @@
 from functools import wraps
 import re
 from typing import Annotated, Callable, TypeVar
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from pydantic.functional_validators import AfterValidator
 
 from wapang.app.user.errors import InvalidFieldFormatError
@@ -82,8 +82,8 @@ class UserSignupRequest(BaseModel):
 
 
 class UserUpdateRequest(BaseModel):
-    email: Annotated[str | None, AfterValidator(skip_none(validate_email))]
-    address: Annotated[str | None, AfterValidator(skip_none(validate_address))]
+    email: Annotated[str | None, AfterValidator(skip_none(validate_email))] = None
+    address: Annotated[str | None, AfterValidator(skip_none(validate_address))] = None
     phone_number: Annotated[
         str | None, AfterValidator(skip_none(validate_phone_number))
-    ]
+    ] = None

@@ -1,5 +1,5 @@
 from fastapi import HTTPException
-from starlette.status import *
+from starlette.status import HTTP_400_BAD_REQUEST, HTTP_409_CONFLICT
 
 
 class EmailAlreadyExistsError(HTTPException):

@@ -1,6 +1,6 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Header
-from starlette.status import *
+from starlette.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_401_UNAUTHORIZED
 
 from wapang.app.user.dto.requests import UserSignupRequest, UserUpdateRequest
 from wapang.app.user.dto.responses import MyProfileResponse
