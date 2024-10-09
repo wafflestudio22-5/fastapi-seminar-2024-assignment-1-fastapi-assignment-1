@@ -1,5 +1,5 @@
 from functools import cache
-from wapang.app.user.errors import EmailAlreadyExistsError, UsernameAlreadyExistsError
+from wapang.app.user.errors import EmailAlreadyExistsError, UserUnsignedError, UsernameAlreadyExistsError
 from wapang.app.user.models import User
 
 
@@ -30,13 +30,13 @@ class UserStore:
         user_id = self.username_index.get(username)
         if not user_id:
             return None
-        return self.store[user_id].model_copy()
+        return self.store[user_id]
 
     def get_user_by_email(self, email: str) -> User | None:
         user_id = self.email_index.get(email)
         if not user_id:
             return None
-        return self.store[user_id].model_copy()
+        return self.store[user_id]
 
     def update_user(
         self,
@@ -47,11 +47,11 @@ class UserStore:
     ) -> User:
         user = self.get_user_by_username(username)
         if not user:
-            raise ValueError(f"User {username} does not exist")
+            raise UserUnsignedError()
 
         if email:
             if self.get_user_by_email(email):
-                raise ValueError(f"Email {email} already exists")
+                raise EmailAlreadyExistsError()
             self.email_index.pop(user.email)
             self.email_index[email] = user.id
             user.email = email
