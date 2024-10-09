@@ -16,7 +16,7 @@ class InvalidFieldFormatError(HTTPException):
 
 class MissingRequiredFieldError(HTTPException):
     def __init__(self) -> None:
-        super().__init__(HTTP_400_BAD_REQUEST, "Missing required field")
+        super().__init__(HTTP_400_BAD_REQUEST, "Missing required fields")
 
 class UserUnsignedError(HTTPException):
     def __init__(self) -> None:
